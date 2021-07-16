@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vobjs>
+  <vo class="com.demo2.supplier.entity.Supplier" tableName="Supplier">
+    <property name="id" column="id" isPrimaryKey="true"></property>
+    <property name="name" column="name"></property>
+  </vo>
+</vobjs>
