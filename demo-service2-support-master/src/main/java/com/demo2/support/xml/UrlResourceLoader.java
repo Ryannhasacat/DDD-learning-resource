@@ -13,7 +13,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 /**
  * load resources with the url.
- * @author fangang
  */
 public class UrlResourceLoader 
 					extends AbstractResourceLoader implements ResourceLoader {
@@ -26,7 +25,9 @@ public class UrlResourceLoader
 	 * @param clazz the class help to load resource.
 	 */
 	public UrlResourceLoader(Class<?> clazz) {
-		if(clazz!=null) this.clazz = clazz;
+		if(clazz!=null) {
+			this.clazz = clazz;
+		}
 	}
 	@Override
 	public boolean loadResource(ResourceCallBack callback, String path) throws IOException {
@@ -34,10 +35,10 @@ public class UrlResourceLoader
 		PathMatchingResourcePatternResolver resolver = 
 				new PathMatchingResourcePatternResolver(this.clazz.getClassLoader());
 		Resource[] loaders = resolver.getResources(path);
-		for(int i=0; i<loaders.length; i++){
-			printLog(loaders[i]);
-			InputStream is = loaders[i].getInputStream();
-			if(is!=null){
+		for (Resource loader : loaders) {
+			printLog(loader);
+			InputStream is = loader.getInputStream();
+			if (is != null) {
 				callback.apply(is);
 				success = true;
 			}

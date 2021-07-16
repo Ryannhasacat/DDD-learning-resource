@@ -22,6 +22,7 @@ import com.demo2.support.exception.DaoException;
 @Component
 public class VObjFactory extends XmlBuildFactoryTemplate {
 	private static Map<String, VObj> vObjMap = new HashMap<>();
+
 	@Value("vObjFile")
 	private String vObjFile = "classpath:vObj.xml";
 	

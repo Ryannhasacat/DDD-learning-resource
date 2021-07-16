@@ -29,10 +29,14 @@ public class EntityHelper {
 	 * @return daoHelper
 	 */
 	public static DaoHelper readDataFromEntity(Object entity) {
-		if(entity==null) throw new DaoException("The entity is null");
+		if(entity==null) {
+			throw new DaoException("The entity is null");
+		}
 		
 		VObj vObj = VObjFactory.getVObj(entity.getClass().getName());
-		if(vObj==null) throw new DaoException("No found the entity ["+entity.getClass().getName()+"] in the vObj.xml");
+		if(vObj==null) {
+			throw new DaoException("No found the entity ["+entity.getClass().getName()+"] in the vObj.xml");
+		}
 		
 		List<Property> properties = vObj.getProperties();
 		DaoHelper helper = new DaoHelper();
@@ -43,7 +47,9 @@ public class EntityHelper {
 			String column = property.getColumn();
 			Object value = BeanUtils.getValueByField(entity, name);
 			
-			if(value==null) continue;
+			if(value==null) {
+				continue;
+			}
 			helper.getColumns().add(column);
 			helper.getValues().add(value);
 			
@@ -52,7 +58,9 @@ public class EntityHelper {
 			map.put("value", value);
 			helper.getColMap().add(map);
 			
-			if(property.isPrimaryKey()) helper.getPkMap().add(map);
+			if(property.isPrimaryKey()) {
+				helper.getPkMap().add(map);
+			}
 		}
 		return helper;
 	}
@@ -64,7 +72,9 @@ public class EntityHelper {
 	 * @return
 	 */
 	public static <T> T convertMapToEntity(Map<String, Object> map, T entity) {
-		if(map==null && entity==null) throw new DaoException("Illegal parameters!");
+		if(map==null && entity==null) {
+			throw new DaoException("Illegal parameters!");
+		}
 		for(String key : map.keySet()) {
 			Object value = map.get(key);
 			BeanUtils.setValueByField(entity, key, type->{return BeanUtils.bind(type, value);});
@@ -80,8 +90,12 @@ public class EntityHelper {
 	 */
 	public static <S extends Serializable, T extends Entity<S>> 
 			DaoHelper prepareForList(Collection<S> ids, T template) {
-		if(template==null) throw new DaoException("illegal parameters!");
-		if(ids==null||ids.isEmpty()) return null;
+		if(template==null) {
+			throw new DaoException("illegal parameters!");
+		}
+		if(ids==null||ids.isEmpty()) {
+			return null;
+		}
 		
 		//list of DaoHelper, which help to execute sql.
 		List<DaoHelper> listOfDaoHelper = new ArrayList<>();

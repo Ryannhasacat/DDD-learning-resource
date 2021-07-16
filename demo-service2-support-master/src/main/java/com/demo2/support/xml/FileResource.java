@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  * search and read file with java.io.File
  * @author fangang
  */
-public class FileResource implements Resource, ResourcePath {
+public class  FileResource implements Resource, ResourcePath {
 
 	private static final Log log = LogFactory.getLog(FileResource.class);
 	private File file;
@@ -56,7 +56,8 @@ public class FileResource implements Resource, ResourcePath {
 	 * @return InputStream
 	 * @exception IOException
 	 */
-	public InputStream getInputStream() throws IOException {
+	@Override
+    public InputStream getInputStream() throws IOException {
 		File file = this.getFile();
 		if(file==null||file.isDirectory()){
 			return null;
@@ -73,6 +74,7 @@ public class FileResource implements Resource, ResourcePath {
 	 * @return Resource[]
 	 * @exception IOException
 	 */
+	@Override
 	public Resource[] getResources() throws IOException {
 		File file = this.getFile();
 		if(file==null){return null;}
@@ -80,9 +82,12 @@ public class FileResource implements Resource, ResourcePath {
 			File[] files = file.listFiles();
 			Filter filter = this.getFilter();
 			List<FileResource> fileLoaders = new ArrayList<FileResource>();
-			for(int i=0; i<files.length; i++){
-				if(filter!=null&&!filter.isSatisfied(files[i].getName())){continue;}
-				fileLoaders.add(new FileResource(files[i]));
+			assert files != null;
+			for (File value : files) {
+				if (filter != null && !filter.isSatisfied(value.getName())) {
+					continue;
+				}
+				fileLoaders.add(new FileResource(value));
 			}
 			return (Resource[])fileLoaders.toArray(new Resource[fileLoaders.size()]);
 		}
@@ -115,8 +120,9 @@ public class FileResource implements Resource, ResourcePath {
 	public String getFileName() {
 		if(this.getFile()==null){return null;}
 		String fileName = this.getFile().getName();
-		if(fileName.regionMatches(0, "\\", 0, 2))
+		if(fileName.regionMatches(0, "\\", 0, 2)) {
 			fileName = fileName.replaceAll("\\", "/");
+		}
 		return fileName;
 	}
 }

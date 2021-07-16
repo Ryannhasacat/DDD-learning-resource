@@ -26,7 +26,9 @@ public class ClassPathResourceLoader
 	 * @param clazz the class to load resource
 	 */
 	public ClassPathResourceLoader(Class<?> clazz) {
-		if(clazz!=null) this.clazz = clazz;
+		if(clazz!=null) {
+			this.clazz = clazz;
+		}
 	}
 	@Override
 	public boolean loadResource(ResourceCallBack callback, String path) throws IOException{

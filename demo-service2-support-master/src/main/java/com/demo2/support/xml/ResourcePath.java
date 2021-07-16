@@ -7,7 +7,6 @@ import java.io.IOException;
 
 /**
  * read resources by loader.
- * @author 范钢
  */
 public interface ResourcePath {
 	

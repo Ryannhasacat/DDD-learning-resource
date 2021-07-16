@@ -106,11 +106,11 @@ public abstract class XmlBuildFactoryTemplate {
 		} catch (IOException e) {
 			try {
 				FileResourceLoader loader = new FileResourceLoader();
-				loader.loadResource(is->readXmlStream(is), paths);
+				loader.loadResource(this::readXmlStream, paths);
 			} catch (IOException e1) {
 				try {
 					UrlResourceLoader loader = new UrlResourceLoader();
-					loader.loadResource(is->readXmlStream(is), paths);
+					loader.loadResource(this::readXmlStream, paths);
 				} catch (IOException e2) {
 					throw new RuntimeException("no found the file", e2);
 				}

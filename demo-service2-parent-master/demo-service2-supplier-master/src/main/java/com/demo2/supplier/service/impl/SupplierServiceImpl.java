@@ -14,6 +14,7 @@ import com.demo2.supplier.service.SupplierService;
  * @author fangang
  */
 public class SupplierServiceImpl implements SupplierService {
+
 	private BasicDao dao;
 	/**
 	 * @return the dao

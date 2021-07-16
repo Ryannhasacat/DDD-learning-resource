@@ -27,6 +27,7 @@ import com.demo2.support.service.impl.QueryServiceImpl;
  * @author fangang
  */
 public class AutofillQueryServiceImpl extends QueryServiceImpl {
+
 	private BasicDao dao;
 	/**
 	 * @return the dao

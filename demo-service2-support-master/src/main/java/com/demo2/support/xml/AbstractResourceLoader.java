@@ -18,9 +18,9 @@ public abstract class AbstractResourceLoader implements ResourceLoader {
 	public Filter getFilter() {
 		if(filter==null){
 			filter = new Filter(){
+				@Override
 				public boolean isSatisfied(String fileName) {
-					if(fileName.endsWith(".xml")||fileName.endsWith(".XML")){return true;}
-					else {return false;}
+					return fileName.endsWith(".xml") || fileName.endsWith(".XML");
 				}};
 		}
 		return filter;
@@ -37,9 +37,9 @@ public abstract class AbstractResourceLoader implements ResourceLoader {
 	@Override
 	public boolean loadResource(ResourceCallBack callback, String... paths) throws IOException {
 		boolean success = true;
-		for(int i=0; i<paths.length; i++) {
-			if(!loadResource(callback, paths[i])) {
-				success=false;
+		for (String path : paths) {
+			if (!loadResource(callback, path)) {
+				success = false;
 			}
 		}
 		return success;

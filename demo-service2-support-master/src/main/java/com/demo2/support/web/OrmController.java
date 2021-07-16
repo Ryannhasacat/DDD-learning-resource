@@ -35,6 +35,7 @@ import com.demo2.support.utils.EntityUtils;
  */
 @RestController
 public class OrmController {
+
 	@Autowired
 	private ApplicationContext applicationContext = null;
 	
@@ -53,7 +54,9 @@ public class OrmController {
 		Object service = getBean(beanName);
 		Method method = getMethod(service, methodName);
 		
-		if(json==null) json = new HashMap<>();
+		if(json==null) {
+			json = new HashMap<>();
+		}
 		for (Enumeration<String> e = request.getParameterNames(); e.hasMoreElements();) {
 			String key = e.nextElement();
 			String value = request.getParameter(key);
@@ -71,7 +74,9 @@ public class OrmController {
 	 * @return the instance of the bean
 	 */
 	private Object getBean(String name) {
-		if(name==null||name.isEmpty()) throw new OrmException("The bean name is empty!");
+		if(name==null||name.isEmpty()) {
+			throw new OrmException("The bean name is empty!");
+		}
 		try {
 			return applicationContext.getBean(name);
 		} catch (NoSuchBeanDefinitionException e) {
@@ -88,13 +93,19 @@ public class OrmController {
 	 * @return the reference of the method
 	 */
 	private Method getMethod(Object service, String name) {
-		if(name==null||name.isEmpty()) throw new OrmException("The method name is empty!");
+		if(name==null||name.isEmpty()) {
+			throw new OrmException("The method name is empty!");
+		}
 		Method[] allOfMethods = service.getClass().getDeclaredMethods();
 		Method rtn = null;
 		for(Method method : allOfMethods) {
-			if(method.getName().equals(name)) rtn = method;
+			if(method.getName().equals(name)) {
+				rtn = method;
+			}
 		}
-		if(rtn!=null) return rtn; //if have override, return the last one.
+		if(rtn!=null) {
+			return rtn; //if have override, return the last one.
+		}
 		throw new OrmException("No such method["+name+"] in the service["+service.getClass().getName()+"]");
 	}
 	
@@ -117,7 +128,9 @@ public class OrmController {
 		}
 		Class<?> firstOfParameterType = allOfParameterTypes[0];
 		
-		if(!EntityUtils.isEntity(firstOfParameterType)) return null;
+		if(!EntityUtils.isEntity(firstOfParameterType)) {
+			return null;
+		}
 		return EntityUtils.createEntity((Class<Entity>)firstOfParameterType, json);
 	}
 	

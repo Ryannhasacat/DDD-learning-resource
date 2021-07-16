@@ -117,7 +117,9 @@ public class Repository extends DecoratorDao implements BasicDao {
 	 * @return whether the entity has join and the join is aggregation.
 	 */
 	private <S extends Serializable> boolean hasJoinAndAggregation(Entity<S> template) {
-		if(template==null) return false;
+		if(template==null) {
+			return false;
+		}
 		VObj vObj = VObjFactory.getVObj(template.getClass().getName());
 		List<Join> listOfJoins = vObj.getJoins();
 		if(listOfJoins==null||listOfJoins.isEmpty()) {

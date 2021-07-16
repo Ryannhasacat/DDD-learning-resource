@@ -21,9 +21,9 @@ public class FileResourceLoader
 		loader.setFilter(this.getFilter());
 		Resource[] loaders = loader.getResources();
 		if(loaders==null){return false;}
-		for(int i=0; i<loaders.length; i++){
-			InputStream is = loaders[i].getInputStream();
-			if(is!=null){
+		for (Resource resource : loaders) {
+			InputStream is = resource.getInputStream();
+			if (is != null) {
 				callback.apply(is);
 				success = true;
 			}

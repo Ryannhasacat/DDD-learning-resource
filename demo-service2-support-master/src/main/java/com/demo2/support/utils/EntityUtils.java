@@ -79,7 +79,9 @@ public class EntityUtils {
 	 * @return whether the clazz is an entity
 	 */
 	public static boolean isEntity(Class<?> clazz) {
-		if(Entity.class.isAssignableFrom(clazz)) return true;
+		if(Entity.class.isAssignableFrom(clazz)) {
+			return true;
+		}
 		return false;
 	}
 	/**
@@ -89,11 +91,15 @@ public class EntityUtils {
 	 * @return the entity with values
 	 */
 	public static <T extends Entity<S>, S extends Serializable> T createEntity(Class<T> clazz, Map<String, Object> json) {
-		if(clazz==null) throw new OrmException("please give the class of the entity");
+		if(clazz==null) {
+			throw new OrmException("please give the class of the entity");
+		}
 		T entity = createEntity(clazz);
-		if(json!=null&&!json.isEmpty())
-			for(String fieldName : json.keySet()) 
+		if(json!=null&&!json.isEmpty()) {
+			for(String fieldName : json.keySet()) {
 				setValueToEntity(entity, fieldName, json.get(fieldName));
+			}
+		}
 		return entity;
 	}
 	/**
@@ -105,7 +111,9 @@ public class EntityUtils {
 		String firstStr = fieldName.substring(0,1);
 		String setMethodName = "set"+firstStr.toUpperCase()+fieldName.substring(1);
 		Method method = BeanUtils.getMethodIfExists(entity, setMethodName);
-		if(method==null) return;
+		if(method==null) {
+			return;
+		}
 		Type[] allOfParameterTypes = method.getGenericParameterTypes();
 		Type firstOfParameterType = allOfParameterTypes[0];
 		Object obj = BeanUtils.bind(firstOfParameterType, value);
@@ -157,7 +165,9 @@ public class EntityUtils {
 		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> listOfMap = (List<Map<String, Object>>) value;
 		List<T> list = new ArrayList<>();
-		for(Map<String, Object> map : listOfMap) list.add(createEntity(type, map));
+		for(Map<String, Object> map : listOfMap) {
+			list.add(createEntity(type, map));
+		}
 		return list;
 	}
 }
