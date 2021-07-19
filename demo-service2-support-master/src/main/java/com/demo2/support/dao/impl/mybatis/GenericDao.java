@@ -6,12 +6,15 @@ package com.demo2.support.dao.impl.mybatis;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Component;
 
 /**
  * The generic dao which persist data with mybatis.
  * @author fangang
  */
+@Mapper
 public interface GenericDao {
 	/**
 	 * @param tableName
