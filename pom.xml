@@ -24,12 +24,12 @@
     <module>demo-service2-parent-master</module>
     <module>demo-service2-support-master</module>
   </modules>
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-    </dependency>
-  </dependencies>
+<!--  <dependencies>-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.cloud</groupId>-->
+<!--      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--    </dependency>-->
+<!--  </dependencies>-->
 
   <dependencyManagement>
     <dependencies>

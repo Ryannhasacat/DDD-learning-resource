@@ -96,6 +96,10 @@ public class QueryServiceImpl implements QueryService {
 	}
 	
 	/**
+	 * TODO aggValue is mapped to Data Model for domain layer to operate.
+	 *  mark: what aggregation do ? callback to see
+	 *
+	 *
 	 * @param params
 	 * @param resultSet
 	 */

@@ -10,12 +10,14 @@ import java.util.List;
 import com.demo2.customer.entity.Address;
 import com.demo2.customer.entity.Customer;
 import com.demo2.customer.service.CustomerService;
+import com.demo2.support.service.impl.QueryServiceImpl;
 
 /**
  * The implement of the customer service
  * @author fangang
  */
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl extends QueryServiceImpl implements CustomerService {
+
 	private BasicDao dao;
 	/**
 	 * @return the dao

@@ -28,6 +28,8 @@ public class SupplierServiceImpl implements SupplierService {
 	public void setDao(BasicDao dao) {
 		this.dao = dao;
 	}
+
+
 	@Override
 	public Supplier loadSupplier(Long id) {
 		Supplier supplier = new Supplier();

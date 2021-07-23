@@ -9,6 +9,6 @@
 	>
 	<description>The application context for orm</description>
 	<bean id="supplier" class="com.demo2.supplier.service.impl.SupplierServiceImpl">
-		<property name="dao" ref="basicDao"></property>
+		<property name="dao" ref="basicDao" />
 	</bean>
 </beans>

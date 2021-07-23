@@ -63,8 +63,8 @@
     </dependency>
     
   	<dependency>
-  		<groupId>com.demo</groupId>
-  		<artifactId>demo-service2-support</artifactId>
+  		<groupId>com.base.process</groupId>
+  		<artifactId>mars-process-support</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

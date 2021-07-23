@@ -134,6 +134,7 @@ public abstract class XmlBuildFactoryTemplate {
 			if(inputStream==null) {
 				throw new RuntimeException("no input stream");
 			}
+			//bookmark
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	        factory.setValidating(this.isValidating());
 	        factory.setNamespaceAware(this.isNamespaceAware());
