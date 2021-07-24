@@ -57,7 +57,9 @@ public class BeanUtils {
 		try {
 			Field field = bean.getClass().getDeclaredField(fieldName);
 			boolean isAccessible = field.isAccessible();
-			if(!isAccessible) field.setAccessible(true);
+			if(!isAccessible) {
+				field.setAccessible(true);
+			}
 			field.set(bean, value);
 			field.setAccessible(isAccessible);
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {

@@ -25,6 +25,7 @@ import com.demo2.support.service.QueryService;
  */
 @RestController
 public class QueryController {
+
 	@Autowired
 	private ApplicationContext applicationContext = null;
 

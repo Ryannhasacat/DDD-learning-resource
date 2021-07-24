@@ -17,6 +17,8 @@ import com.demo2.support.dao.QueryDao;
  * @author fangang
  */
 public class QueryDaoMybatisImpl implements QueryDao {
+
+
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
 	private String sqlMapper;
@@ -37,21 +39,15 @@ public class QueryDaoMybatisImpl implements QueryDao {
 
 	@Override
 	public List<?> query(Map<String, Object> params) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.selectList(sqlMapper+".query", params);
-		} finally {
-			sqlSession.close();
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			return sqlSession.selectList(sqlMapper + ".query", params);
 		}
 	}
 
 	@Override
 	public long count(Map<String, Object> params) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.selectOne(sqlMapper+".count", params);
-		} finally {
-			sqlSession.close();
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(sqlMapper + ".count", params);
 		}
 	}
 
@@ -72,12 +68,9 @@ public class QueryDaoMybatisImpl implements QueryDao {
 			buffer += value+"("+key+") "+key;
 		}
 		params.put("aggregation", buffer);
-		
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.selectOne(sqlMapper+".aggregate", params);
-		} finally {
-			sqlSession.close();
+
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(sqlMapper + ".aggregate", params);
 		}
 	}
 }

@@ -36,7 +36,9 @@ public class CacheEntityDao extends DecoratorDao implements BasicDao {
 	@Override
 	public <S extends Serializable, T extends Entity<S>> T load(S id, T template) {
 		T entity = cache.get(id, template);
-		if(entity!=null) return entity;
+		if(entity!=null) {
+			return entity;
+		}
 		entity = super.load(id, template);
 		cache.set(entity);
 		return entity;
@@ -49,7 +51,9 @@ public class CacheEntityDao extends DecoratorDao implements BasicDao {
 		Collection<T> entities = cache.getForList(ids, template);
 		entities.removeIf(t->t==null);
 		List<S> otherIds = getIdsNotInCache(ids, entities);
-		if(otherIds.isEmpty()) return (List<T>)entities; //cache get all of the entities.
+		if(otherIds.isEmpty()) {
+			return (List<T>)entities; //cache get all of the entities.
+		}
 		
 		List<T> list = super.loadForList(otherIds, template);
 		
@@ -64,11 +68,17 @@ public class CacheEntityDao extends DecoratorDao implements BasicDao {
 	 */
 	private <S extends Serializable, T extends Entity<S>> List<S> getIdsNotInCache(Collection<S> ids, Collection<T> entities) {
 		Map<S, T> map = new HashMap<>();
-		for(T entity : entities) if(entity!=null) map.put(entity.getId(), entity);
+		for(T entity : entities) {
+			if(entity!=null) {
+				map.put(entity.getId(), entity);
+			}
+		}
 		List<S> otherIds = new ArrayList<>();
-		for(S id : ids) 
-			if(id!=null&&map.get(id)==null) 
+		for(S id : ids) {
+			if(id!=null&&map.get(id)==null) {
 				otherIds.add(id);
+			}
+		}
 		return otherIds;
 	}
 	
@@ -88,8 +98,9 @@ public class CacheEntityDao extends DecoratorDao implements BasicDao {
 	@Override
 	public <T> void update(T entity) {
 		super.update(entity);
-		if(entity instanceof Entity) 
+		if(entity instanceof Entity) {
 			deleteCache((Entity<?>) entity);
+		}
 	}
 
 	/**
@@ -102,8 +113,9 @@ public class CacheEntityDao extends DecoratorDao implements BasicDao {
 	@Override
 	public <T> void insertOrUpdate(T entity) {
 		super.insertOrUpdate(entity);
-		if(entity instanceof Entity) 
+		if(entity instanceof Entity) {
 			deleteCache((Entity<?>) entity);
+		}
 	}
 
 	@Override
@@ -115,8 +127,9 @@ public class CacheEntityDao extends DecoratorDao implements BasicDao {
 	@Override
 	public <T> void delete(T entity) {
 		super.delete(entity);
-		if(entity instanceof Entity) 
+		if(entity instanceof Entity) {
 			deleteCache((Entity<?>) entity);
+		}
 	}
 
 	@Override
