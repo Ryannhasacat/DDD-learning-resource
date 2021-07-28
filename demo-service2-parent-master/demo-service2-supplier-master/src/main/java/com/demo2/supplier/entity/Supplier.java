@@ -3,7 +3,7 @@
  */
 package com.demo2.supplier.entity;
 
-import com.demo2.support.entity.Entity;
+import com.mars.support.entity.Entity;
 
 /**
  * The supplier entity

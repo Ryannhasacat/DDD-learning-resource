@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.demo2.product.ProductApplication;
-import com.demo2.support.web.OrmController;
+import com.mars.support.web.OrmController;
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 

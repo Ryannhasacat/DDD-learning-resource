@@ -6,7 +6,7 @@ package com.demo2.customer.entity;
 import java.util.Date;
 import java.util.List;
 
-import com.demo2.support.entity.Entity;
+import com.mars.support.entity.Entity;
 
 /**
  * The customer entity

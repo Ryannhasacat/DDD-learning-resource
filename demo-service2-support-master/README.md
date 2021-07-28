@@ -139,9 +139,9 @@ http://localhost:9003/query/{bean}
 然后将其注入到Spring中，完成相应的配置，就可以进行查询：
 
 ```bash
-	<bean id="customerQry" class="com.demo2.support.service.impl.QueryServiceImpl">
+	<bean id="customerQry" class="QueryServiceImpl">
 		<property name="queryDao">
-			<bean class="com.demo2.support.dao.impl.QueryDaoMybatisImpl">
+			<bean class="QueryDaoMybatisImpl">
 				<property name="sqlMapper" value="com.demo2.trade.query.dao.CustomerMapper.query"></property>
 			</bean>
 		</property>
@@ -227,9 +227,9 @@ public class ProductQueryServiceImpl extends QueryServiceImpl {
 在Product值对象中加入Supplier属性并进行以上配置，则Product在进行get/load操作或query操作时，可以自动补填Supplier。为了实现补填功能，Service在dao注入时，应当注入repository而不是basicDao。在进行查询时，bean也应当配置AutofillQueryServiceImpl并配置其dao：
 
 ```bash
-	<bean id="productQry" class="com.demo2.support.repository.AutofillQueryServiceImpl">
+	<bean id="productQry" class="AutofillQueryServiceImpl">
 		<property name="queryDao">
-			<bean class="com.demo2.support.dao.impl.QueryDaoMybatisImpl">
+			<bean class="QueryDaoMybatisImpl">
 				<property name="sqlMapper" value="com.demo2.trade.query.dao.ProductMapper.query"></property>
 			</bean>
 		</property>

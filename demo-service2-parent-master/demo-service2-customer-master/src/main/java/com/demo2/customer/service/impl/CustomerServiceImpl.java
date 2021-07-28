@@ -3,14 +3,14 @@
  */
 package com.demo2.customer.service.impl;
 
-import com.demo2.support.dao.BasicDao;
+import com.mars.support.dao.BasicDao;
 
 import java.util.List;
 
 import com.demo2.customer.entity.Address;
 import com.demo2.customer.entity.Customer;
 import com.demo2.customer.service.CustomerService;
-import com.demo2.support.service.impl.QueryServiceImpl;
+import com.mars.support.service.impl.QueryServiceImpl;
 
 /**
  * The implement of the customer service

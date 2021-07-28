@@ -5,7 +5,7 @@ package com.demo2.product.service.impl;
 
 import java.util.List;
 
-import com.demo2.support.dao.BasicDao;
+import com.mars.support.dao.BasicDao;
 import com.demo2.product.entity.Product;
 import com.demo2.product.service.ProductService;
 

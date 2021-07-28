@@ -8,12 +8,12 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	>
 	<description>The application context for dao</description>
-	<bean id="basicDao" class="com.demo2.support.dao.impl.BasicDaoJdbcImpl"/>
-	<bean id="redisCache" class="com.demo2.support.cache.RedisCache"/>
-	<bean id="repository" class="com.demo2.support.repository.Repository">
+	<bean id="basicDao" class="com.mars.support.dao.impl.BasicDaoJdbcImpl"/>
+	<bean id="redisCache" class="com.mars.support.cache.RedisCache"/>
+	<bean id="repository" class="com.mars.support.repository.Repository">
 		<property name="dao" ref="basicDao"/>
 	</bean>
-	<bean id="repositoryWithCache" class="com.demo2.support.repository.CacheEntityDao">
+	<bean id="repositoryWithCache" class="com.mars.support.repository.CacheEntityDao">
 		<property name="dao" ref="repository"/>
 		<property name="cache" ref="redisCache"/>
 	</bean>

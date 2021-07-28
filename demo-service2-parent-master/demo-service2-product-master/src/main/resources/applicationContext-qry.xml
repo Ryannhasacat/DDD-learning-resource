@@ -14,9 +14,9 @@
 	 	-> sqlMapper ： 在resources.mapper 下 创建mybatis 的mapper文件，编辑对应的需要操作的实体的查询语句。
 	 -->
 	<description>The application context for query</description>
-	<bean id="productQry" class="com.demo2.support.repository.AutofillQueryServiceImpl">
+	<bean id="productQry" class="com.mars.support.repository.AutofillQueryServiceImpl">
 		<property name="queryDao">
-			<bean class="com.demo2.support.dao.impl.QueryDaoMybatisImpl">
+			<bean class="com.mars.support.dao.impl.QueryDaoMybatisImpl">
 				<property name="sqlMapper" value="com.demo2.product.query.dao.ProductMapper" />
 			</bean>
 		</property>

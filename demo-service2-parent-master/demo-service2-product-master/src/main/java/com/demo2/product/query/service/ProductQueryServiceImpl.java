@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.demo2.support.entity.ResultSet;
-import com.demo2.support.service.impl.QueryServiceImpl;
+import com.mars.support.entity.ResultSet;
+import com.mars.support.service.impl.QueryServiceImpl;
 import com.demo2.product.entity.Product;
 import com.demo2.product.entity.Supplier;
 import com.demo2.product.service.SupplierService;

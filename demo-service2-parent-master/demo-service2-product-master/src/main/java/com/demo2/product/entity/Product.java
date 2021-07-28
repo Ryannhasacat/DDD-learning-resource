@@ -3,7 +3,7 @@
  */
 package com.demo2.product.entity;
 
-import com.demo2.support.entity.Entity;
+import com.mars.support.entity.Entity;
 
 /**
  * The product entity
