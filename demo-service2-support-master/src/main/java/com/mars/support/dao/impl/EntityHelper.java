@@ -113,7 +113,9 @@ public class EntityHelper {
 			 for(Map<Object, Object> map : helper.getPkMap()) {
 				 Object key = map.get("key");
 				 Object value = map.get("value");
-				 if(mapOfValues.get(key)==null) mapOfValues.put(key, new ArrayList<Object>());
+				 if(mapOfValues.get(key)==null) {
+					 mapOfValues.put(key, new ArrayList<Object>());
+				 }
 				 mapOfValues.get(key).add(value);
 			 }
 		}

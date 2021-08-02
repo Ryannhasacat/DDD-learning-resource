@@ -16,7 +16,7 @@ import com.mars.support.service.impl.QueryServiceImpl;
  * The implement of the customer service
  * @author fangang
  */
-public class CustomerServiceImpl extends QueryServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
 	private BasicDao dao;
 	/**

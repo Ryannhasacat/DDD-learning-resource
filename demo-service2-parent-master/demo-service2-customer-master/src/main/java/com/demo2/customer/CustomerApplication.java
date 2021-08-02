@@ -15,9 +15,9 @@ import org.springframework.context.annotation.ImportResource;
  * @author fangang
  */
 @SpringBootApplication
-@ComponentScan(basePackages={"com.demo2"})
+@ComponentScan(basePackages={"com.demo2","com.mars"})
 @ImportResource(locations={"classpath*:applicationContext-*.xml"})
-@MapperScan("com.demo2.support.dao")
+@MapperScan("com.mars.support.dao")
 @EnableDiscoveryClient
 public class CustomerApplication {
 
