@@ -50,16 +50,14 @@ public class OrmController {
 			@RequestBody(required=false) Map<String, Object> json, HttpServletRequest request) {
 		Object service = getBean(beanName);
 		Method method = getMethod(service, methodName);
-		
-		if(json==null) {
-			json = new HashMap<>();
-		}
+
+		if(json==null) json = new HashMap<>();
 		for (Enumeration<String> e = request.getParameterNames(); e.hasMoreElements();) {
 			String key = e.nextElement();
 			String value = request.getParameter(key);
 			json.put(key, value);
 		}
-		
+
 		Object vo = getValueObj(method, json);
 		Object[] args = getArguments(method, json, vo);
 		return invoke(service, method, args);

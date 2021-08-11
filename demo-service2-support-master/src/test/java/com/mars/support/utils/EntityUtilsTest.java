@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
 public class EntityUtilsTest {
@@ -84,8 +85,9 @@ public class EntityUtilsTest {
 	}
 	
 	@Test
-	public void testBindEntity() {
-		Supplier actual = EntityUtils.bindEntity(Supplier.class, "{id:20001, name:'Alibaba'}");
+	public void testBindEntity() throws JsonProcessingException {
+		Supplier actual = (Supplier) BeanUtils.bind(Supplier.class, "{\"id\":20001, \"name\":\"Alibaba\"}");
+//		Supplier actual = EntityUtils.bindEntity(Supplier.class, "{id:20001, name:'Alibaba'}");
 		assertThat(actual, equalTo(new Supplier(new Long(20001), "Alibaba")));
 	}
 	
@@ -94,7 +96,7 @@ public class EntityUtilsTest {
 		Product actual = new Product();
 		Product excepted = new Product();
 		excepted.setSupplier(new Supplier(new Long(20001), "Alibaba"));
-		EntityUtils.setValueToEntity(actual, "supplier", "{id:20001, name:'Alibaba'}");
+		EntityUtils.setValueToEntity(actual, "supplier", "{\"id\":20001, \"name\":\"Alibaba\"}");
 		assertThat(actual, equalTo(excepted));
 	}
 	

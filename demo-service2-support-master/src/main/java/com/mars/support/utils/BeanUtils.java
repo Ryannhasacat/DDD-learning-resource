@@ -97,7 +97,7 @@ public class BeanUtils {
 	 * @return the downcast value
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static Object bind(Type type, Object value) {
+	public static Object bind(Type type, Object value){
 		if(value==null) {
 			return value;
 		}
@@ -140,7 +140,7 @@ public class BeanUtils {
 			}
 			
 			if(EntityUtils.isEntity(clazz)) {
-				return EntityUtils.bindEntity((Class<Entity>)clazz, str);
+				return EntityUtils.bindEntity((Class<Entity>)clazz, value);
 			}
 			
 			//TODO do nothing with other types

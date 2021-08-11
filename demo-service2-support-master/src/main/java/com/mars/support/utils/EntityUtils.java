@@ -14,12 +14,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mars.support.entity.Entity;
 import com.mars.support.exception.OrmException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author fangang
  */
+@Slf4j
 public class EntityUtils {
 	/**
 	 * create an entity by class name.
@@ -146,11 +150,30 @@ public class EntityUtils {
 	 * @param json the json string
 	 * @return the entity object
 	 */
-	public static <T extends Entity<S>, S extends Serializable> T bindEntity(Class<T> type, String json) {
+	//TODO may have risk , mark and jump here to change at anytime
+	public static <T extends Entity<S>, S extends Serializable> T bindEntity(Class<T> type, Object json){
 		Class<Map<String, Object>> clazz = null;
-		json = json.replace("=", ":");
-		Map<String, Object> jsonMap = JSONObject.parseObject(json, clazz);
-		return EntityUtils.createEntity(type, jsonMap);
+//		json = json.replace("=", ":");
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = null;
+		Map<String, Object> jsonMap = null;
+		T entity = null;
+		try {
+			if (json instanceof String){
+				jsonMap = mapper.readValue(json.toString(), Map.class);
+			}
+			else {
+				jsonStr = mapper.writeValueAsString(json);
+				jsonMap= JSONObject.parseObject(jsonStr, clazz);
+			}
+			entity = EntityUtils.createEntity(type, jsonMap);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			log.error("com.mars.support.utils.EntityUtils.bindEntity jsonStr: {}",jsonMap);
+		}
+		log.info("com.mars.support.utils.EntityUtils.bindEntity jsonMap: {}",jsonMap);
+
+		return entity;
 	}
 	
 	/**
