@@ -86,9 +86,15 @@ public class EntityUtilsTest {
 	
 	@Test
 	public void testBindEntity() throws JsonProcessingException {
-		Supplier actual = (Supplier) BeanUtils.bind(Supplier.class, "{\"id\":20001, \"name\":\"Alibaba\"}");
+
+		Supplier supplier = new Supplier();
+		supplier.setId(20001L);
+		supplier.setName("ali");
+		supplier.setProducts(null);
+		Supplier actual = (Supplier) BeanUtils.bind(Supplier.class, supplier);
+//		Supplier actual = (Supplier) BeanUtils.bind(Supplier.class, "{\"id\":20001, \"name\":\"Alibaba\"}");
 //		Supplier actual = EntityUtils.bindEntity(Supplier.class, "{id:20001, name:'Alibaba'}");
-		assertThat(actual, equalTo(new Supplier(new Long(20001), "Alibaba")));
+		assertThat(actual, equalTo(new Supplier(new Long(20001), "ali")));
 	}
 	
 	@Test
@@ -96,7 +102,7 @@ public class EntityUtilsTest {
 		Product actual = new Product();
 		Product excepted = new Product();
 		excepted.setSupplier(new Supplier(new Long(20001), "Alibaba"));
-		EntityUtils.setValueToEntity(actual, "supplier", "{\"id\":20001, \"name\":\"Alibaba\"}");
+		EntityUtils.setValueToEntity(actual, "supplier", "{id:20001, name:'Alibaba'}");
 		assertThat(actual, equalTo(excepted));
 	}
 	

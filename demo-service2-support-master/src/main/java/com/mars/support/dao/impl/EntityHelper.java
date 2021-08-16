@@ -77,7 +77,7 @@ public class EntityHelper {
 		}
 		for(String key : map.keySet()) {
 			Object value = map.get(key);
-			BeanUtils.setValueByField(entity, key, type->{return BeanUtils.bind(type, value);});
+			BeanUtils.setValueByField(entity, key, type-> BeanUtils.bind(type, value));
 		}
 		return entity;
 	}

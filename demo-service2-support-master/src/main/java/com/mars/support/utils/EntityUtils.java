@@ -160,7 +160,8 @@ public class EntityUtils {
 		T entity = null;
 		try {
 			if (json instanceof String){
-				jsonMap = mapper.readValue(json.toString(), Map.class);
+				jsonStr = json.toString().replace("=", ":");
+				jsonMap = JSONObject.parseObject(jsonStr, clazz);
 			}
 			else {
 				jsonStr = mapper.writeValueAsString(json);
