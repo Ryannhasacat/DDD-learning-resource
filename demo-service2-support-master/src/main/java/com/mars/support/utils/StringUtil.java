@@ -1,5 +1,6 @@
 package com.mars.support.utils;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,13 +15,14 @@ public class StringUtil {
         if(ss.length ==1){
             return underscore;
         }
-
+        for (int i = 0; i < ss.length; i++) {
+            ss[i] = ss[i].toLowerCase();
+        }
         StringBuffer sb = new StringBuffer();
         sb.append(ss[0]);
         for (int i = 1; i < ss.length; i++) {
             sb.append(upperFirstCase(ss[i]));
         }
-
         return sb.toString();
     }
 

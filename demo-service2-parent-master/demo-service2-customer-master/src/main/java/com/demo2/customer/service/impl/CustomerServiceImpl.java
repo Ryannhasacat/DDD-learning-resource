@@ -5,6 +5,9 @@ package com.demo2.customer.service.impl;
 
 import com.mars.support.dao.BasicDao;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
 
 import com.demo2.customer.entity.Address;
@@ -59,5 +62,28 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Address> loadAddresses(List<Long> ids) {
 		return dao.loadForList(ids, new Address());
+	}
+
+	public static void main(String[] args) throws NoSuchFieldException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+		Customer customer = new Customer();
+		customer.setBirthday(new Date());
+		Field[] fields = customer.getClass().getDeclaredFields();
+		for (Field field : fields){
+//			System.out.println(field.getGenericType().getTypeName());
+			String typeName = field.getGenericType().getTypeName();
+			if (typeName.equals("java.util.Date")){
+				Field dateAttribute = customer.getClass().getDeclaredField(field.getName());
+				String methodName = getMethodName(dateAttribute.getName());
+				Class<?> clazz = Customer.class;
+				Date invoke = (Date) clazz.getDeclaredMethod(methodName).invoke(customer);
+				System.out.println(invoke);
+			}
+		}
+
+
+	}
+
+	private static String getMethodName(String fieldName) {
+		return "get"+fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1);
 	}
 }

@@ -5,6 +5,9 @@ package com.mars.support.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -70,4 +73,24 @@ public class DateUtils {
 	public static Date getDate(String string) {
 		return getDate(string, dateFormat);
 	}
+
+	/**
+	 * 时间戳转日期
+	 *
+	 * @param timestamp 时间戳
+	 */
+	public static LocalDateTime timestampToLocalDateTime(long timestamp) {
+		Instant instant = Instant.ofEpochMilli(timestamp);
+		return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+	}
+
+	/**
+	 * 日期转时间戳
+	 *
+	 * @param localDateTime 日期
+	 */
+	public static long localDateTimeToTimestamp(LocalDateTime localDateTime) {
+		return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+	}
+
 }
