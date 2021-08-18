@@ -5,13 +5,13 @@ package com.mars.support.dao.impl;
 
 import java.io.Serializable;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import com.mars.support.dao.BasicDao;
 import com.mars.support.dao.impl.mybatis.GenericDao;
+import com.mars.support.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -119,6 +119,7 @@ public class BasicDaoJdbcImpl implements BasicDao {
 		//convert result set from List<Map> to List<Entity>
 		List<T> listOfEntity = new ArrayList<T>();
 		for(Map<String, Object> map : list) {
+			map = formatKey(map);
 			@SuppressWarnings("unchecked")
 			T temp = (T)template.clone();
 			T entity = EntityHelper.convertMapToEntity(map, temp);
@@ -126,7 +127,19 @@ public class BasicDaoJdbcImpl implements BasicDao {
 		}
 		return listOfEntity;
 	}
-	
+
+	public Map<String, Object> formatKey(Map<String, Object> map) {
+		ConcurrentHashMap<String, Object> currentMap = new ConcurrentHashMap<>();
+		map.forEach((key, value) -> {
+			if (StringUtil.isUnderscore(key)) {
+				currentMap.put(StringUtil.underscoreToCamelCase(key), value);
+			}else {
+				currentMap.put(key,value);
+			}
+		});
+		return currentMap;
+	}
+
 	@Override
 	public <S extends Serializable, T extends Entity<S>> List<T> loadAll(T template) {
 		DaoHelper helper = EntityHelper.readDataFromEntity(template);
