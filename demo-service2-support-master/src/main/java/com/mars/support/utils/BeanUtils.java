@@ -140,8 +140,13 @@ public class BeanUtils {
 				return DateUtils.timestampToLocalDateTime(Long.parseLong(str));
 			}
 			if(clazz.equals(LocalDateTime.class)){
+				String[] split = str.split("\\.");
+				if (split.length == 1){
+					DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					return DateUtils.localDateTimeToTimestamp(LocalDateTime.parse(str,df));
+				}
 				DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-				return DateUtils.localDateTimeToTimestamp(LocalDateTime.parse(str,df));
+				return DateUtils.localDateTimeToTimestamp(LocalDateTime.parse(split[0],df));
 			}
 			
 			if(clazz.equals(List.class)||clazz.equals(Set.class)) {
