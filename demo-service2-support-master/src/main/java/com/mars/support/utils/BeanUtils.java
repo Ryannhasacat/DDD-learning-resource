@@ -9,7 +9,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -136,17 +135,8 @@ public class BeanUtils {
 			if(clazz.equals(Date.class)) {
 				return DateUtils.getDate(str,"yyyy-MM-dd HH:mm:ss");
 			}
-			if(clazz.equals(Timestamp.class)){
-				return DateUtils.timestampToLocalDateTime(Long.parseLong(str));
-			}
 			if(clazz.equals(LocalDateTime.class)){
-				String[] split = str.split("\\.");
-				if (split.length == 1){
-					DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-					return DateUtils.localDateTimeToTimestamp(LocalDateTime.parse(str,df));
-				}
-				DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-				return DateUtils.localDateTimeToTimestamp(LocalDateTime.parse(split[0],df));
+				return Timestamp.valueOf(str).toLocalDateTime();
 			}
 			
 			if(clazz.equals(List.class)||clazz.equals(Set.class)) {

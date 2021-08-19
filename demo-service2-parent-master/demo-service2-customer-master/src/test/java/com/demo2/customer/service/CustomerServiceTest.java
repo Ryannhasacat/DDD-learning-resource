@@ -40,9 +40,9 @@ public class CustomerServiceTest {
 		customer.setId(id);
 		customer.setName("Johnwood");
 		customer.setSex("Male");
-		customer.setBirthday(DateUtils.getDate("2013-07-08","yyyy-MM-dd"));
+//		customer.setBirthday(DateUtils.getDate("2013-07-08","yyyy-MM-dd"));
 		customer.setIdentification("110211199901013322");
-		customer.setPhoneNumber("010-88897070");
+//		customer.setPhoneNumber("010-88897070");
 		service.save(customer);
 		
 		Customer actual = service.load(id);
@@ -71,9 +71,9 @@ public class CustomerServiceTest {
 		customer.setId(id);
 		customer.setName("Swaarzi");
 		customer.setSex("Male");
-		customer.setBirthday(DateUtils.getDate("1995-01-01","yyyy-MM-dd"));
+//		customer.setBirthday(DateUtils.getDate("1995-01-01","yyyy-MM-dd"));
 		customer.setIdentification("110211199501013344");
-		customer.setPhoneNumber("010-88896666");
+//		customer.setPhoneNumber("010-88896666");
 		
 		List<Address> addresses = new ArrayList<>();
 		Address address = new Address();

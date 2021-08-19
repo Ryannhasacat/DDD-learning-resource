@@ -7,6 +7,10 @@ import com.mars.support.dao.BasicDao;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -65,22 +69,61 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	public static void main(String[] args) throws NoSuchFieldException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+//		Customer customer = new Customer();
+//		customer.setBirthday(new Date());
+//		Field[] fields = customer.getClass().getDeclaredFields();
+//		for (Field field : fields){
+////			System.out.println(field.getGenericType().getTypeName());
+//			String typeName = field.getGenericType().getTypeName();
+//			if (typeName.equals("java.util.Date")){
+//				Field dateAttribute = customer.getClass().getDeclaredField(field.getName());
+//				String methodName = getMethodName(dateAttribute.getName());
+//				Class<?> clazz = Customer.class;
+//				Date invoke = (Date) clazz.getDeclaredMethod(methodName).invoke(customer);
+//				System.out.println(invoke);
+//			}
+//		}
 		Customer customer = new Customer();
-		customer.setBirthday(new Date());
-		Field[] fields = customer.getClass().getDeclaredFields();
-		for (Field field : fields){
-//			System.out.println(field.getGenericType().getTypeName());
-			String typeName = field.getGenericType().getTypeName();
-			if (typeName.equals("java.util.Date")){
-				Field dateAttribute = customer.getClass().getDeclaredField(field.getName());
-				String methodName = getMethodName(dateAttribute.getName());
-				Class<?> clazz = Customer.class;
-				Date invoke = (Date) clazz.getDeclaredMethod(methodName).invoke(customer);
-				System.out.println(invoke);
-			}
+		customer.setBirthday(LocalDateTime.now());
+		LocalDateTime birthday = customer.getBirthday();
+
+//		formatLocalDateTimeForObj(customer);
+		formatLocalDateTime(birthday);
+		System.out.println(birthday);
+//		System.out.println(customer);
+
+	}
+
+	public static void formatLocalDateTimeForObj(Object entity){
+		if(entity == null){
+			return;
 		}
+		Class<?> clazz = entity.getClass();
+		Field[] fields = clazz.getDeclaredFields();
+		if (fields.length == 0) {
+			return;
+		}
+		Arrays.stream(fields).forEach(field -> {
+			if (!field.getType().isPrimitive()) {
+				try {
+					Object attr = clazz.getDeclaredMethod(getMethodName(field.getName())).invoke(entity);
+					if (attr instanceof LocalDateTime) {
+						formatLocalDateTime((LocalDateTime)attr);
+					}else {
+						formatLocalDateTimeForObj(attr);
+					}
+				} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
+	}
 
+	public static void formatLocalDateTime(LocalDateTime attr) {
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String format = attr.format(fmt);
+		System.out.println(format);
 	}
 
 	private static String getMethodName(String fieldName) {

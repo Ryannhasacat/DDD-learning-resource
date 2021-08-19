@@ -3,6 +3,7 @@
  */
 package com.demo2.customer.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,22 +18,22 @@ public class Customer extends Entity<Long> {
 	private Long id;
 	private String name;
 	private String sex;
-	private Date birthday;
+	private LocalDateTime birthday;
 	private String identification;
-	private String phone_number;
+//	private String phone_number;
 	private List<Address> addresses;
 	public Customer() {
 		super();
 	}
 	
-	public Customer(Long id, String name, String sex, Date birthday,
-			String identification, String phoneNumber) {
+	public Customer(Long id, String name, String sex, LocalDateTime birthday,
+			String identification) {
 		this.id = id;
 		this.name = name;
 		this.sex = sex;
 		this.birthday = birthday;
 		this.identification = identification;
-		this.phone_number = phoneNumber;
+//		this.phone_number = phoneNumber;
 	}
 
 	/**
@@ -78,14 +79,14 @@ public class Customer extends Entity<Long> {
 	/**
 	 * @return the birthday
 	 */
-	public Date getBirthday() {
+	public LocalDateTime getBirthday() {
 		return birthday;
 	}
 
 	/**
 	 * @param birthday the birthday to set
 	 */
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDateTime birthday) {
 		this.birthday = birthday;
 	}
 
@@ -101,18 +102,18 @@ public class Customer extends Entity<Long> {
 	public void setIdentification(String identification) {
 		this.identification = identification;
 	}
-	/**
-	 * @return the phoneNumber
-	 */
-	public String getPhoneNumber() {
-		return phone_number;
-	}
-	/**
-	 * @param phoneNumber the phoneNumber to set
-	 */
-	public void setPhoneNumber(String phoneNumber) {
-		this.phone_number = phoneNumber;
-	}
+//	/**
+//	 * @return the phoneNumber
+//	 */
+//	public String getPhoneNumber() {
+//		return phone_number;
+//	}
+//	/**
+//	 * @param phoneNumber the phoneNumber to set
+//	 */
+//	public void setPhoneNumber(String phoneNumber) {
+//		this.phone_number = phoneNumber;
+//	}
 
 	/**
 	 * @return the addresses
