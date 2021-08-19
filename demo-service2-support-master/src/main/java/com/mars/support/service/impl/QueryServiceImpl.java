@@ -5,6 +5,7 @@ package com.mars.support.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.mars.support.dao.QueryDao;
 import com.mars.support.entity.ResultSet;
@@ -38,8 +39,11 @@ public class QueryServiceImpl implements QueryService {
 		ResultSet resultSet = new ResultSet();
 		page(params, resultSet);
 		aggregate(params, resultSet);
-		
-		beforeQuery(params);
+
+		ResultSet cacheResult = beforeQuery(params, resultSet);
+		if (Optional.ofNullable(cacheResult).isPresent()) {
+			return cacheResult;
+		}
 		List<?> result = queryDao.query(params);
 		resultSet.setData(result);
 		resultSet = afterQuery(params, resultSet);
@@ -51,8 +55,9 @@ public class QueryServiceImpl implements QueryService {
 	 * It just a hook that override the function in subclass if we need do something before query.
 	 * @param params the parameters the query need
 	 */
-	protected void beforeQuery(Map<String, Object> params) {
+	protected ResultSet beforeQuery(Map<String, Object> params,ResultSet resultSet) {
 		//just a hook
+		return resultSet;
 	}
 	
 	/**
